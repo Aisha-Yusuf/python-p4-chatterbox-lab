@@ -9,7 +9,7 @@ class TestApp:
     with app.app_context():
         m = Message.query.filter(
             Message.body == "Hello 👋"
-            ).filter(Message.username == "Liza")
+            ).filter(Message.username == "Aisha")
 
         for message in m:
             db.session.delete(message)
@@ -19,18 +19,18 @@ class TestApp:
     def test_has_correct_columns(self):
         with app.app_context():
 
-            hello_from_liza = Message(
+            hello_from_Aisha = Message(
                 body="Hello 👋",
-                username="Liza")
+                username="Aisha")
             
-            db.session.add(hello_from_liza)
+            db.session.add(hello_from_Aisha)
             db.session.commit()
 
-            assert(hello_from_liza.body == "Hello 👋")
-            assert(hello_from_liza.username == "Liza")
-            assert(type(hello_from_liza.created_at) == datetime)
+            assert(hello_from_Aisha.body == "Hello 👋")
+            assert(hello_from_Aisha.username == "Liza")
+            assert(type(hello_from_Aisha.created_at) == datetime)
 
-            db.session.delete(hello_from_liza)
+            db.session.delete(hello_from_Aisha)
             db.session.commit()
 
     def test_returns_list_of_json_objects_for_all_messages_in_database(self):
@@ -51,7 +51,7 @@ class TestApp:
                 '/messages',
                 json={
                     "body":"Hello 👋",
-                    "username":"Liza",
+                    "username":"Aisha",
                 }
             )
 
@@ -69,14 +69,14 @@ class TestApp:
                 '/messages',
                 json={
                     "body":"Hello 👋",
-                    "username":"Liza",
+                    "username":"Aisha",
                 }
             )
 
             assert(response.content_type == 'application/json')
 
             assert(response.json["body"] == "Hello 👋")
-            assert(response.json["username"] == "Liza")
+            assert(response.json["username"] == "Aisha")
 
             h = Message.query.filter_by(body="Hello 👋").first()
             assert(h)
@@ -134,15 +134,15 @@ class TestApp:
         '''deletes the message from the database.'''
         with app.app_context():
 
-            hello_from_liza = Message(
+            hello_from_Aisha = Message(
                 body="Hello 👋",
-                username="Liza")
+                username="Aisha")
             
-            db.session.add(hello_from_liza)
+            db.session.add(hello_from_Aisha)
             db.session.commit()
 
             app.test_client().delete(
-                f'/messages/{hello_from_liza.id}'
+                f'/messages/{hello_from_Aisha.id}'
             )
 
             h = Message.query.filter_by(body="Hello 👋").first()

@@ -9,7 +9,7 @@ class TestMessage:
     with app.app_context():
         m = Message.query.filter(
             Message.body == "Hello 👋"
-            ).filter(Message.username == "Liza")
+            ).filter(Message.username == "Aisha")
 
         for message in m:
             db.session.delete(message)
@@ -20,13 +20,13 @@ class TestMessage:
         '''has columns for message body, username, and creation time.'''
         with app.app_context():
 
-            hello_from_liza = Message(
+            hello_from_Aisha = Message(
                 body="Hello 👋",
-                username="Liza")
+                username="Aisha")
             
-            db.session.add(hello_from_liza)
+            db.session.add(hello_from_Aisha)
             db.session.commit()
 
-            assert(hello_from_liza.body == "Hello 👋")
-            assert(hello_from_liza.username == "Liza")
-            assert(type(hello_from_liza.created_at) == datetime)
+            assert(hello_from_Aisha.body == "Hello 👋")
+            assert(hello_from_Aisha.username == "Aisha")
+            assert(type(hello_from_Aisha.created_at) == datetime)
